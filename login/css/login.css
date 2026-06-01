@@ -191,7 +191,15 @@ transition:0.3s;
 background:#222;
 transform:scale(1.03);
 }
+button{
+cursor:pointer;
+transition:all 0.3s ease;
+}
 
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
   
 }
 
