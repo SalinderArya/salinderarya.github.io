@@ -1,1 +1,61 @@
+.user-table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
 
+.user-table th{
+background:#800000;
+color:white;
+padding:10px;
+font-size:14px;
+}
+
+.user-table td{
+border:1px solid #ddd;
+padding:8px;
+font-size:13px;
+text-align:center;
+}
+
+.approve-btn{
+background:green;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:4px;
+cursor:pointer;
+margin:2px;
+}
+
+.reject-btn{
+background:red;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:4px;
+cursor:pointer;
+margin:2px;
+}
+
+.modify-btn{
+background:#FFD700;
+color:black;
+border:none;
+padding:6px 10px;
+border-radius:4px;
+cursor:pointer;
+margin:2px;
+}
+
+.approve-btn:hover{
+opacity:.8;
+}
+
+.reject-btn:hover{
+opacity:.8;
+}
+
+.modify-btn:hover{
+opacity:.8;
+}
