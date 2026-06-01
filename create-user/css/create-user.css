@@ -89,28 +89,6 @@ font-size:15px;
 
 /* CREATE BUTTON */
 
-.create-btn{
-width:100%;
-padding:12px;
-background:#800000;
-color:white;
-border:none;
-border-radius:6px;
-font-size:15px;
-font-weight:bold;
-cursor:pointer;
-margin-bottom:10px;
-transition:all .3s ease;
-}
-
-.create-btn:hover{
-background:#a00000;
-transform:scale(1.05);
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
-
-/* BACK BUTTON */
-
 .back-btn{
 width:100%;
 padding:12px;
@@ -122,12 +100,30 @@ font-size:15px;
 font-weight:bold;
 cursor:pointer;
 transition:all .3s ease;
+outline:none;
 }
 
 .back-btn:hover{
-background:#222;
+background:#800000;
+color:white;
 transform:scale(1.05);
 box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.back-btn:focus{
+background:#800000;
+color:white;
+outline:none;
+}
+
+.back-btn:active{
+background:#600000;
+color:white;
+}
+
+button{
+appearance:none;
+-webkit-appearance:none;
 }
 
 /* MOBILE RESPONSIVE */
