@@ -108,32 +108,49 @@ font-size:15px;
 cursor:pointer;
 margin-bottom:10px;
 font-weight:bold;
+transition:all 0.3s ease;
 }
 
-/* BUTTONS */
+/* LOGIN BUTTON */
 
 .login-btn{
 background:#800000;
 color:white;
 }
 
+.login-btn:hover{
+background:#a00000;
+transform:scale(1.05);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* CREATE USER BUTTON */
+
 .create-btn{
 background:#FFD700;
 color:black;
 }
+
+.create-btn:hover{
+background:#ffea00;
+transform:scale(1.05);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* FORGET PASSWORD BUTTON */
 
 .forget-btn{
 background:#444;
 color:white;
 }
 
-.login-btn:hover,
-.create-btn:hover,
 .forget-btn:hover{
-opacity:0.9;
+background:#222;
+transform:scale(1.05);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* MOBILE */
+/* MOBILE RESPONSIVE */
 
 @media(max-width:768px){
 
@@ -159,47 +176,15 @@ height:60%;
 font-size:35px;
 }
 
-  .login-btn{
-background:#800000;
-color:white;
-transition:0.3s;
+.company-box p{
+font-size:18px;
 }
 
-.login-btn:hover{
-background:#a00000;
-transform:scale(1.03);
+.company-box h3{
+font-size:22px;
 }
 
-.create-btn{
-background:#FFD700;
-color:black;
-transition:0.3s;
+.login-card{
+width:95%;
 }
-
-.create-btn:hover{
-background:#ffea00;
-transform:scale(1.03);
 }
-
-.forget-btn{
-background:#444;
-color:white;
-transition:0.3s;
-}
-
-.forget-btn:hover{
-background:#222;
-transform:scale(1.03);
-}
-button{
-cursor:pointer;
-transition:all 0.3s ease;
-}
-
-button:hover{
-transform:translateY(-2px);
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
-  
-}
-
