@@ -1,1 +1,82 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, Arial, sans-serif;
+}
 
+.container{
+display:flex;
+height:100vh;
+}
+
+.left-panel{
+width:70%;
+background:#800000;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+text-align:center;
+}
+
+.company-box h1{
+font-size:55px;
+}
+
+.company-box p{
+font-size:24px;
+color:#FFD700;
+margin:10px 0;
+}
+
+.company-box h3{
+font-size:28px;
+}
+
+.divider{
+width:8px;
+background:#FFD700;
+}
+
+.right-panel{
+width:30%;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#fff;
+}
+
+.form-card{
+width:90%;
+max-width:360px;
+padding:25px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,0,0,0.15);
+}
+
+.form-card h2{
+text-align:center;
+color:#800000;
+margin-bottom:20px;
+}
+
+.form-card input,
+.form-card select{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.form-card button{
+width:100%;
+padding:12px;
+background:#800000;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
