@@ -91,3 +91,45 @@ border-radius:5px;
 cursor:pointer;
 font-weight:bold;
 }
+/* CREATE USER BUTTON */
+
+.create-btn{
+width:100%;
+padding:12px;
+background:#800000;
+color:white;
+border:none;
+border-radius:6px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+margin-bottom:10px;
+transition:all 0.3s ease;
+}
+
+.create-btn:hover{
+background:#a00000;
+transform:scale(1.05);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* BACK TO LOGIN BUTTON */
+
+.back-btn{
+width:100%;
+padding:12px;
+background:#444;
+color:white;
+border:none;
+border-radius:6px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+transition:all 0.3s ease;
+}
+
+.back-btn:hover{
+background:#222;
+transform:scale(1.05);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
