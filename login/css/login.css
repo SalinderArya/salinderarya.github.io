@@ -1,4 +1,162 @@
-body{
+*{
 margin:0;
 padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, Arial, sans-serif;
+}
+
+body{
+height:100vh;
+background:#f5f5f5;
+}
+
+.container{
+display:flex;
+height:100vh;
+}
+
+/* LEFT SIDE */
+
+.left-panel{
+width:70%;
+background:#800000;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+}
+
+.company-box img{
+width:180px;
+height:180px;
+object-fit:contain;
+margin-bottom:25px;
+}
+
+.company-box h1{
+font-size:55px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.company-box p{
+font-size:24px;
+color:#FFD700;
+margin-bottom:15px;
+}
+
+.company-box h3{
+font-size:30px;
+margin-bottom:10px;
+}
+
+.company-box span{
+font-size:18px;
+opacity:.9;
+}
+
+/* YELLOW LINE */
+
+.divider{
+width:8px;
+background:#FFD700;
+}
+
+/* RIGHT SIDE */
+
+.right-panel{
+width:30%;
+display:flex;
+justify-content:center;
+align-items:center;
+background:white;
+}
+
+/* LOGIN CARD */
+
+.login-card{
+width:85%;
+max-width:350px;
+padding:35px;
+border-radius:15px;
+box-shadow:0 0 25px rgba(0,0,0,0.15);
+background:white;
+}
+
+.login-card h2{
+text-align:center;
+color:#800000;
+margin-bottom:25px;
+}
+
+.login-card input{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:15px;
+}
+
+.login-card button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:6px;
+font-size:15px;
+cursor:pointer;
+margin-bottom:10px;
+font-weight:bold;
+}
+
+/* BUTTONS */
+
+.login-btn{
+background:#800000;
+color:white;
+}
+
+.create-btn{
+background:#FFD700;
+color:black;
+}
+
+.forget-btn{
+background:#444;
+color:white;
+}
+
+.login-btn:hover,
+.create-btn:hover,
+.forget-btn:hover{
+opacity:0.9;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.container{
+flex-direction:column;
+}
+
+.left-panel{
+width:100%;
+height:40%;
+}
+
+.divider{
+display:none;
+}
+
+.right-panel{
+width:100%;
+height:60%;
+}
+
+.company-box h1{
+font-size:35px;
+}
+
 }
