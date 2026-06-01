@@ -1,24 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Admin Dashboard</title>
+
+<link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+
+<header>
+
+<div class="logo-area">
+<h2>Prince Computers</h2>
+<span>Garhi Birbal</span>
+</div>
+
+<div class="admin-area">
+Super Admin |
+<button class="logout-btn">Logout</button>
+</div>
+
+</header>
+
+<div class="main-container">
+
+<nav class="sidebar">
+
+<ul>
+<li>Dashboard</li>
+<li>Pending Users</li>
+<li>Approved Users</li>
+<li>Rejected Users</li>
+<li>User Search</li>
+<li>Reports</li>
+<li>Settings</li>
+</ul>
+
+</nav>
+
+<section class="content">
+
 <h2>Pending User Approval</h2>
 
-<table class="user-table">
+<table>
 
 <thead>
 <tr>
+
+<th>User ID</th>
 <th>Name</th>
+<th>Mobile</th>
 <th>KO Code</th>
+<th>Username</th>
 <th>User Type</th>
 <th>Status</th>
+<th>Bank Name</th>
+<th>Account No</th>
+<th>IFSC</th>
 <th>Action</th>
+
 </tr>
 </thead>
 
 <tbody>
 
 <tr>
-<td>Rahul Kumar</td>
+
+<td>U001</td>
+<td>Rahul</td>
+<td>9876543210</td>
 <td>KO001</td>
+<td>rahul</td>
 <td>User</td>
 <td>Pending</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
 
 <td>
 
@@ -42,7 +101,11 @@ Modify
 
 </table>
 
-<button class="back-btn"
-onclick="window.location='../login/login.html'">
-Back To Login
-</button>
+</section>
+
+</div>
+
+<script src="js/admin.js"></script>
+
+</body>
+</html>
