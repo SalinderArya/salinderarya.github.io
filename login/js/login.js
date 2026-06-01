@@ -1,26 +1,16 @@
-document
-.getElementById("loginBtn")
-.addEventListener("click", function(){
+document.querySelector(".login-btn").addEventListener("click", function(){
 
-const username =
-document.getElementById("username").value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-const password =
-document.getElementById("password").value;
+    if(username === "admin" && password === "admin"){
 
-/* SUPER ADMIN */
+        window.location.href = "../superadmin/admin.html";
 
-if(username === "admin" &&
-   password === "admin")
-{
+    }else{
 
-window.location.href =
-"../superadmin/admin.html";
+        alert("Invalid Username or Password");
 
-return;
-
-}
-
-alert("Invalid Username Or Password");
+    }
 
 });
