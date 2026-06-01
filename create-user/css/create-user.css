@@ -5,10 +5,17 @@ box-sizing:border-box;
 font-family:Segoe UI, Arial, sans-serif;
 }
 
+body{
+height:100vh;
+background:#f5f5f5;
+}
+
 .container{
 display:flex;
 height:100vh;
 }
+
+/* LEFT PANEL */
 
 .left-panel{
 width:70%;
@@ -16,43 +23,52 @@ background:#800000;
 display:flex;
 justify-content:center;
 align-items:center;
-color:white;
 text-align:center;
+color:white;
 }
 
 .company-box h1{
 font-size:55px;
+font-weight:bold;
+margin-bottom:10px;
 }
 
 .company-box p{
 font-size:24px;
 color:#FFD700;
-margin:10px 0;
+margin-bottom:15px;
 }
 
 .company-box h3{
-font-size:28px;
+font-size:30px;
 }
+
+/* YELLOW DIVIDER */
 
 .divider{
 width:8px;
 background:#FFD700;
 }
 
+/* RIGHT PANEL */
+
 .right-panel{
 width:30%;
 display:flex;
 justify-content:center;
 align-items:center;
-background:#fff;
+background:white;
 }
+
+/* FORM CARD */
 
 .form-card{
 width:90%;
-max-width:360px;
-padding:25px;
+max-width:380px;
+padding:30px;
 border-radius:15px;
-box-shadow:0 0 20px rgba(0,0,0,0.15);
+box-shadow:0 0 25px rgba(0,0,0,0.15);
+background:white;
 }
 
 .form-card h2{
@@ -65,61 +81,91 @@ margin-bottom:20px;
 .form-card select{
 width:100%;
 padding:12px;
-margin-bottom:10px;
+margin-bottom:12px;
 border:1px solid #ccc;
-border-radius:5px;
+border-radius:6px;
+font-size:15px;
 }
 
-.form-card button{
-width:100%;
-padding:12px;
-background:#800000;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
-font-weight:bold;
-}
-
-.back-btn{
-width:100%;
-padding:12px;
-margin-top:10px;
-background:#444;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
-font-weight:bold;
-}
+/* CREATE BUTTON */
 
 .create-btn{
+width:100%;
+padding:12px;
 background:#800000;
 color:white;
-transition:0.3s;
+border:none;
+border-radius:6px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+margin-bottom:10px;
+transition:all .3s ease;
 }
 
 .create-btn:hover{
 background:#a00000;
-transform:scale(1.03);
+transform:scale(1.05);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
+/* BACK BUTTON */
+
 .back-btn{
-background:#555;
+width:100%;
+padding:12px;
+background:#444;
 color:white;
-transition:0.3s;
+border:none;
+border-radius:6px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+transition:all .3s ease;
 }
 
 .back-btn:hover{
 background:#222;
-transform:scale(1.03);
-}
-button{
-cursor:pointer;
-transition:all 0.3s ease;
+transform:scale(1.05);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
-button:hover{
-transform:translateY(-2px);
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
+/* MOBILE RESPONSIVE */
+
+@media(max-width:768px){
+
+.container{
+flex-direction:column;
+}
+
+.left-panel{
+width:100%;
+height:40%;
+}
+
+.divider{
+display:none;
+}
+
+.right-panel{
+width:100%;
+height:60%;
+}
+
+.company-box h1{
+font-size:35px;
+}
+
+.company-box p{
+font-size:18px;
+}
+
+.company-box h3{
+font-size:22px;
+}
+
+.form-card{
+width:95%;
+}
+
 }
