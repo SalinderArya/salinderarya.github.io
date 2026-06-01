@@ -80,3 +80,14 @@ border-radius:5px;
 cursor:pointer;
 font-weight:bold;
 }
+.back-btn{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:#444;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
