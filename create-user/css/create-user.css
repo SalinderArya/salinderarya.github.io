@@ -94,23 +94,16 @@ font-weight:bold;
 /* CREATE USER BUTTON */
 
 .create-btn{
-width:100%;
-padding:12px;
-background:#800000;
-color:white;
-border:none;
-border-radius:6px;
-font-size:15px;
-font-weight:bold;
-cursor:pointer;
-margin-bottom:10px;
-transition:all 0.3s ease;
+background:#800000 !important;
+color:white !important;
+transition:all 0.3s ease !important;
 }
 
 .create-btn:hover{
-background:#a00000;
-transform:scale(1.05);
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
+background:red !important;
+color:white !important;
+transform:scale(1.05) !important;
+box-shadow:0 5px 15px rgba(0,0,0,0.3) !important;
 }
 
 /* BACK TO LOGIN BUTTON */
