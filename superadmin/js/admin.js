@@ -75,7 +75,6 @@ async function loadUsers(){
 }
 
 loadUsers();
-
 function logout(){
 
     window.location.href =
@@ -83,7 +82,6 @@ function logout(){
 
 }
 
-Success. No rows returned
 async function approveUser(id){
 
     const { data, error } =
@@ -117,6 +115,7 @@ async function approveUser(id){
 
     loadUsers();
 }
+
 async function rejectUser(id){
 
     const { error } =
