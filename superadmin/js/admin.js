@@ -35,31 +35,36 @@ async function loadUsers(){
 
     data.forEach(user => {
 
-   html += `
-<tr>
-    <td>${user.id}</td>
-    <td>${user.name}</td>
-    <td>${user.mobile}</td>
-    <td>${user.ko_code}</td>
-    <td>${user.username}</td>
-    <td>${user.user_type}</td>
-    <td>${user.status}</td>
+        html += `
+        <tr>
+            <td>${user.id || ""}</td>
+            <td>${user.name || ""}</td>
+            <td>${user.mobile || ""}</td>
+            <td>${user.ko_code || ""}</td>
+            <td>${user.username || ""}</td>
+            <td>${user.user_type || ""}</td>
+            <td>${user.status || ""}</td>
 
-    <td>
-        <button
-            class="approve-btn"
-            onclick="approveUser(${user.id})">
-            Approve
-        </button>
+            <td>
 
-        <button
-            class="reject-btn"
-            onclick="rejectUser(${user.id})">
-            Reject
-        </button>
-    </td>
-</tr>
-`;
+                <button
+                class="approve-btn"
+                onclick="approveUser(${user.id})">
+                Approve
+                </button>
+
+                <button
+                class="reject-btn"
+                onclick="rejectUser(${user.id})">
+                Reject
+                </button>
+
+            </td>
+
+        </tr>
+        `;
+    });
+
     const tableBody =
     document.getElementById("userTableBody");
 
@@ -79,48 +84,65 @@ function logout(){
 
 async function approveUser(id){
 
-    console.log("APPROVE ID =", id);
-
     const { data, error } =
     await supabaseClient
     .from("users")
     .update({
         status: "approved"
     })
-    .eq("id", Number(id))
+    .eq("id", id)
     .select();
 
-    console.log(data);
-    console.log(error);
+    console.log("APPROVE DATA:", data);
+    console.log("APPROVE ERROR:", error);
 
     if(error){
-        Swal.fire("Error", error.message, "error");
+
+        Swal.fire(
+            "Error",
+            error.message,
+            "error"
+        );
+
         return;
     }
 
-    await loadUsers();
+    Swal.fire(
+        "Success",
+        "User Approved Successfully",
+        "success"
+    );
+
+    loadUsers();
 }
 
 async function rejectUser(id){
 
-    console.log("REJECT ID =", id);
-
-    const { data, error } =
+    const { error } =
     await supabaseClient
     .from("users")
     .update({
         status: "rejected"
     })
-    .eq("id", Number(id))
-    .select();
-
-    console.log(data);
-    console.log(error);
+    .eq("id", id);
 
     if(error){
-        Swal.fire("Error", error.message, "error");
+
+        Swal.fire(
+            "Error",
+            error.message,
+            "error"
+        );
+
         return;
     }
 
-    await loadUsers();
+    Swal.fire(
+        "Rejected",
+        "User Rejected Successfully",
+        "warning"
+    );
+
+    loadUsers();
+
 }
