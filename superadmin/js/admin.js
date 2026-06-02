@@ -84,7 +84,38 @@ function logout(){
 }
 
 Success. No rows returned
+async function approveUser(id){
 
+    alert("User ID = " + id);
+
+    const { data, error } =
+    await supabaseClient
+    .from("users")
+    .update({
+        status: "approved"
+    })
+    .eq("id", id)
+    .select();
+
+    console.log("DATA =", data);
+    console.log("ERROR =", error);
+
+    if(error){
+
+        Swal.fire(
+            "Error",
+            error.message,
+            "error"
+        );
+
+        return;
+    }
+
+    Swal.fire(
+        "Success",
+        "User Approved Successfully",
+        "success"
+    );
 async function rejectUser(id){
 
     const { error } =
