@@ -86,8 +86,6 @@ function logout(){
 Success. No rows returned
 async function approveUser(id){
 
-    alert("User ID = " + id);
-
     const { data, error } =
     await supabaseClient
     .from("users")
@@ -97,8 +95,8 @@ async function approveUser(id){
     .eq("id", id)
     .select();
 
-    console.log("DATA =", data);
-    console.log("ERROR =", error);
+    console.log("APPROVE DATA:", data);
+    console.log("APPROVE ERROR:", error);
 
     if(error){
 
@@ -116,6 +114,9 @@ async function approveUser(id){
         "User Approved Successfully",
         "success"
     );
+
+    loadUsers();
+}
 async function rejectUser(id){
 
     const { error } =
