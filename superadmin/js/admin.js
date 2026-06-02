@@ -1,121 +1,111 @@
-const SUPABASE_URL =
-"https://hjxqtfykngkwmiejeyei.supabase.co";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Admin Dashboard</title>
 
-const SUPABASE_KEY =
-"sb_publishable_cspfS5CyrtJGlp9DdAq5Pw_DQJoevoG";
+<link rel="stylesheet" href="css/admin.css">
+</head>
 
-const supabaseClient =
-supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+<body>
 
-async function loadUsers(){
+<header>
 
-    const { data, error } =
-    await supabaseClient
-    .from("users")
-    .select("*")
-    .order("id",{ascending:false});
+<div class="logo-area">
+<h2>Prince Computers</h2>
+<span>Garhi Birbal</span>
+</div>
 
-    if(error){
-        console.log(error);
-        return;
-    }
+<div class="admin-area">
+Super Admin |
+<button class="logout-btn" onclick="logout()">
+    Logout
+</button>
+</div>
 
-    let html = "";
+</header>
 
-    data.forEach(user => {
+<div class="main-container">
 
-        html += `
-        <tr>
-            <td>${user.id}</td>
-            <td>${user.name}</td>
-            <td>${user.mobile}</td>
-            <td>${user.ko_code}</td>
-            <td>${user.username}</td>
-            <td>${user.user_type}</td>
-            <td>${user.status}</td>
+<nav class="sidebar">
 
-           <td>
-<button
-class="approve-btn"
-onclick="approveUser(${user.id})">
+<ul>
+<li>Dashboard</li>
+<li>Pending Users</li>
+<li>Approved Users</li>
+<li>Rejected Users</li>
+<li>User Search</li>
+<li>Reports</li>
+<li>Settings</li>
+</ul>
+
+</nav>
+
+<section class="content">
+
+<h2>Pending User Approval</h2>
+
+<table>
+
+<thead>
+<tr>
+
+<th>User ID</th>
+<th>Name</th>
+<th>Mobile</th>
+<th>KO Code</th>
+<th>Username</th>
+<th>User Type</th>
+<th>Status</th>
+<th>Bank Name</th>
+<th>Account No</th>
+<th>IFSC</th>
+<th>Action</th>
+
+</tr>
+</thead>
+
+<tbody id="userTableBody">
+
+</tbody>
+
+<button class="approve-btn">
 Approve
 </button>
 
-<button
-class="reject-btn"
-onclick="rejectUser(${user.id})">
+<button class="reject-btn">
 Reject
 </button>
+
+<button class="modify-btn">
+Modify
+</button>
+
 </td>
-        </tr>
-        `;
-    });
 
-    document.getElementById(
-        "userTableBody"
-    ).innerHTML = html;
-}
+</tr>
 
-loadUsers();
-function logout(){
+<tbody id="userTableBody">
 
-    window.location.href =
-    "../login/login.html";
+</tbody>
 
-}
-/* YAHAN SE NAYA CODE ADD KARNA HAI */
+</table>
 
-async function approveUser(id){
+</section>
 
-    const { error } = await supabaseClient
-    .from("users")
-    .update({
-        status: "approved"
-    })
-    .eq("id", id);
+</div>
 
-    if(error){
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        Swal.fire(
-            "Error",
-            error.message,
-            "error"
-        );
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        return;
-    }
+<script src="js/admin.js"></script>
 
-    Swal.fire(
-        "Success",
-        "User Approved Successfully",
-        "success"
-    );
+</body>
+</html>
 
-    loadUsers();
-}
 
-async function rejectUser(id){
-
-    const { error } = await supabaseClient
-    .from("users")
-    .update({
-        status: "rejected"
-    })
-    .eq("id", id);
-
-    if(error){
-
-        Swal.fire(
-            "Error",
-            error.message,
-            "error"
-        );
-
-        return;
-    }
 
     Swal.fire(
         "Rejected",
