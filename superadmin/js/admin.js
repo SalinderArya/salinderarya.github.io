@@ -90,8 +90,8 @@ async function approveUser(id){
     .update({
         status: "approved"
     })
-    .eq("id", id)
-    .select();
+    .eq("id", Number(id))
+        .select();
 
     console.log("APPROVE DATA:", data);
     console.log("APPROVE ERROR:", error);
