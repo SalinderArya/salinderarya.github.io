@@ -62,4 +62,59 @@ function logout(){
     "../login/login.html";
 
 }
+/* YAHAN SE NAYA CODE ADD KARNA HAI */
 
+async function approveUser(id){
+
+    const { error } = await supabaseClient
+    .from("users")
+    .update({
+        status: "approved"
+    })
+    .eq("id", id);
+
+    if(error){
+
+        Swal.fire(
+            "Error",
+            error.message,
+            "error"
+        );
+
+        return;
+    }
+
+    Swal.fire(
+        "Success",
+        "User Approved Successfully",
+        "success"
+    );
+
+    loadUsers();
+}
+
+async function rejectUser(id){
+
+    const { error } = await supabaseClient
+    .from("users")
+    .update({
+        status: "rejected"
+    })
+    .eq("id", id);
+
+    if(error){
+
+        Swal.fire(
+            "Error",
+            error.message,
+            "error"
+        );
+
+        return;
+    }
+
+    Swal.fire(
+        "Rejected",
+        "User Rejected",
+        "warning"
+    );
