@@ -37,15 +37,19 @@ async function loadUsers(){
             <td>${user.user_type}</td>
             <td>${user.status}</td>
 
-            <td>
-                <button class="approve-btn">
-                    Approve
-                </button>
+           <td>
+<button
+class="approve-btn"
+onclick="approveUser(${user.id})">
+Approve
+</button>
 
-                <button class="reject-btn">
-                    Reject
-                </button>
-            </td>
+<button
+class="reject-btn"
+onclick="rejectUser(${user.id})">
+Reject
+</button>
+</td>
         </tr>
         `;
     });
