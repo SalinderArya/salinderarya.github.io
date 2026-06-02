@@ -1,11 +1,3 @@
-function logout(){
-
-    alert("Logout Successfully");
-
-    window.location.href = "../login/login.html";
-
-}
-
 const SUPABASE_URL =
 "https://hjxqtfykngkwmiejeyei.supabase.co";
 
@@ -65,4 +57,10 @@ async function loadUsers(){
 }
 
 loadUsers();
+function logout(){
+
+    window.location.href =
+    "../login/login.html";
+
+}
 
