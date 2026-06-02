@@ -35,7 +35,7 @@ async function loadUsers(){
 
     data.forEach(user => {
 
-      html += `
+   html += `
 <tr>
     <td>${user.id}</td>
     <td>${user.name}</td>
@@ -48,21 +48,18 @@ async function loadUsers(){
     <td>
         <button
             class="approve-btn"
-            data-id="${user.id}"
-            onclick="approveUser(this)">
+            onclick="approveUser(${user.id})">
             Approve
         </button>
 
         <button
             class="reject-btn"
-            data-id="${user.id}"
-            onclick="rejectUser(this)">
+            onclick="rejectUser(${user.id})">
             Reject
         </button>
     </td>
 </tr>
 `;
-
     const tableBody =
     document.getElementById("userTableBody");
 
@@ -80,11 +77,9 @@ function logout(){
 
 }
 
-async function approveUser(btn){
+async function approveUser(id){
 
-    const id = Number(btn.dataset.id);
-
-    console.log("Approve ID:", id);
+    console.log("APPROVE ID =", id);
 
     const { data, error } =
     await supabaseClient
@@ -92,30 +87,23 @@ async function approveUser(btn){
     .update({
         status: "approved"
     })
-    .eq("id", id)
+    .eq("id", Number(id))
     .select();
 
-    console.log(data, error);
+    console.log(data);
+    console.log(error);
 
     if(error){
         Swal.fire("Error", error.message, "error");
         return;
     }
 
-    Swal.fire(
-        "Success",
-        `User ID ${id} Approved`,
-        "success"
-    );
-
     await loadUsers();
 }
 
-async function rejectUser(btn){
+async function rejectUser(id){
 
-    const id = Number(btn.dataset.id);
-
-    console.log("Reject ID:", id);
+    console.log("REJECT ID =", id);
 
     const { data, error } =
     await supabaseClient
@@ -123,21 +111,16 @@ async function rejectUser(btn){
     .update({
         status: "rejected"
     })
-    .eq("id", id)
+    .eq("id", Number(id))
     .select();
 
-    console.log(data, error);
+    console.log(data);
+    console.log(error);
 
     if(error){
         Swal.fire("Error", error.message, "error");
         return;
     }
-
-    Swal.fire(
-        "Rejected",
-        `User ID ${id} Rejected`,
-        "warning"
-    );
 
     await loadUsers();
 }
