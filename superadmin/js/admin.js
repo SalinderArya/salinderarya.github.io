@@ -83,7 +83,7 @@ function logout(){
 }
 
 async function approveUser(id){
-
+alert("User ID = " + id);
     const { data, error } =
     await supabaseClient
     .from("users")
@@ -117,7 +117,7 @@ async function approveUser(id){
 }
 
 async function rejectUser(id){
-
+alert("User ID = " + id);
     const { error } =
     await supabaseClient
     .from("users")
