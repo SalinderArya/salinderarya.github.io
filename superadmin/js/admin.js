@@ -85,13 +85,17 @@ function logout(){
 
 async function approveUser(id){
 
-    const { error } =
+    const { data, error } =
     await supabaseClient
     .from("users")
     .update({
         status: "approved"
     })
-    .eq("id", id);
+    .eq("id", id)
+    .select();
+
+    console.log("APPROVE DATA:", data);
+    console.log("APPROVE ERROR:", error);
 
     if(error){
 
@@ -111,7 +115,6 @@ async function approveUser(id){
     );
 
     loadUsers();
-
 }
 
 async function rejectUser(id){
