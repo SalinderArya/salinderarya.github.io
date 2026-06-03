@@ -253,15 +253,12 @@ async function searchUsers() {
     }
 
     const { data, error } =
-    await supabaseClient
-        .from("users")
-        .select("*")
-        .or(
-            `name.ilike.%${keyword}%,
-             mobile.ilike.%${keyword}%,
-             username.ilike.%${keyword}%`
-        );
-
+await supabaseClient
+    .from("users")
+    .select("*")
+    .or(
+        `name.ilike.%${keyword}%,mobile.ilike.%${keyword}%,username.ilike.%${keyword}%`
+    );
     if (error) {
         console.log(error);
         return;
