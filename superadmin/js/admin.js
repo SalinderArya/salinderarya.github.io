@@ -296,5 +296,7 @@ async function logout() {
         showConfirmButton: false
     });
 
-    window.location.href = "login/login.html";
+    window.location.replace(
+        "https://salinderarya.github.io/PrinceComputers/login/login.html"
+    );
 }
