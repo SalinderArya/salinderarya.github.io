@@ -130,8 +130,7 @@ async function approveUser(id) {
         "User Approved",
         "success"
     );
-document.getElementById("pageTitle").innerText =
-"Pending User Approval";
+
     loadUsers(currentStatus);
 }
 
