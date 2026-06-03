@@ -4,46 +4,67 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_cspfS5CyrtJGlp9DdAq5Pw_DQJoevoG";
 
-const supabaseClient =
-supabase.createClient(
+const supabaseClient = supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
 
-async function loadUsers(){
+let currentStatus = "pending";
 
-    const { data, error } =
-    await supabaseClient
-    .from("users")
-    .select("*")
-    .order("id", { ascending:false });
+window.onload = () => {
+    loadUsers("pending");
+};
 
-    if(error){
+// ======================
+// LOAD USERS
+// ======================
 
+async function loadUsers(status = null) {
+
+    currentStatus = status;
+
+    let query = supabaseClient
+        .from("users")
+        .select("*")
+        .order("id", { ascending: false });
+
+    if (status) {
+        query = query.eq("status", status);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
         console.log(error);
-
-        Swal.fire(
-            "Error",
-            error.message,
-            "error"
-        );
-
         return;
     }
 
-    let html = "";
+    renderUsers(data);
+}
 
-    data.forEach(user => {
+// ======================
+// RENDER TABLE
+// ======================
 
-        html += `
+function renderUsers(users) {
+
+    const tbody =
+        document.getElementById("userTableBody");
+
+    tbody.innerHTML = "";
+
+    users.forEach(user => {
+
+        tbody.innerHTML += `
         <tr>
-            <td>${user.id || ""}</td>
-            <td>${user.name || ""}</td>
-            <td>${user.mobile || ""}</td>
-            <td>${user.ko_code || ""}</td>
-            <td>${user.username || ""}</td>
-            <td>${user.user_type || ""}</td>
-            <td>${user.status || ""}</td>
+
+            <td>${user.id}</td>
+            <td>${user.name ?? ""}</td>
+            <td>${user.mobile ?? ""}</td>
+            <td>${user.ko_code ?? ""}</td>
+            <td>${user.username ?? ""}</td>
+            <td>${user.user_type ?? ""}</td>
+            <td>${user.status ?? ""}</td>
 
             <td>
 
@@ -59,44 +80,41 @@ async function loadUsers(){
                 Reject
                 </button>
 
+                <button
+                class="delete-btn"
+                onclick="deleteUser(${user.id})">
+                Delete
+                </button>
+
             </td>
 
         </tr>
         `;
     });
-
-    const tableBody =
-    document.getElementById("userTableBody");
-
-    if(tableBody){
-        tableBody.innerHTML = html;
-    }
-
 }
 
-loadUsers();
-function logout(){
+// ======================
+// APPROVE
+// ======================
 
-    window.location.href =
-    "../login/login.html";
+async function approveUser(id) {
 
-}
+    const result = await Swal.fire({
+        title: "Approve User ?",
+        icon: "question",
+        showCancelButton: true
+    });
 
-async function approveUser(id){
+    if (!result.isConfirmed) return;
 
-    const { data, error } =
-    await supabaseClient
-    .from("users")
-    .update({
-        status: "approved"
-    })
-    .eq("id", id)
-    .select();
+    const { error } = await supabaseClient
+        .from("users")
+        .update({
+            status: "approved"
+        })
+        .eq("id", id);
 
-    console.log("APPROVE DATA:", data);
-    console.log("APPROVE ERROR:", error);
-
-    if(error){
+    if (error) {
 
         Swal.fire(
             "Error",
@@ -109,24 +127,35 @@ async function approveUser(id){
 
     Swal.fire(
         "Success",
-        "User Approved Successfully",
+        "User Approved",
         "success"
     );
 
-    loadUsers();
+    loadUsers(currentStatus);
 }
 
-async function rejectUser(id){
+// ======================
+// REJECT
+// ======================
 
-    const { error } =
-    await supabaseClient
-    .from("users")
-    .update({
-        status: "rejected"
-    })
-    .eq("id", id);
+async function rejectUser(id) {
 
-    if(error){
+    const result = await Swal.fire({
+        title: "Reject User ?",
+        icon: "warning",
+        showCancelButton: true
+    });
+
+    if (!result.isConfirmed) return;
+
+    const { error } = await supabaseClient
+        .from("users")
+        .update({
+            status: "rejected"
+        })
+        .eq("id", id);
+
+    if (error) {
 
         Swal.fire(
             "Error",
@@ -139,10 +168,123 @@ async function rejectUser(id){
 
     Swal.fire(
         "Rejected",
-        "User Rejected Successfully",
-        "warning"
+        "User Rejected",
+        "success"
     );
 
-    loadUsers();
+    loadUsers(currentStatus);
+}
 
+// ======================
+// DELETE
+// ======================
+
+async function deleteUser(id) {
+
+    const result = await Swal.fire({
+        title: "Delete User ?",
+        text: "Permanent Delete",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33"
+    });
+
+    if (!result.isConfirmed) return;
+
+    const { error } = await supabaseClient
+        .from("users")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+
+        Swal.fire(
+            "Error",
+            error.message,
+            "error"
+        );
+
+        return;
+    }
+
+    Swal.fire(
+        "Deleted",
+        "User Deleted",
+        "success"
+    );
+
+    loadUsers(currentStatus);
+}
+
+// ======================
+// FILTERS
+// ======================
+
+function showPendingUsers() {
+    loadUsers("pending");
+}
+
+function showApprovedUsers() {
+    loadUsers("approved");
+}
+
+function showRejectedUsers() {
+    loadUsers("rejected");
+}
+
+function showAllUsers() {
+    loadUsers(null);
+}
+
+// ======================
+// SEARCH
+// ======================
+
+async function searchUsers() {
+
+    const keyword =
+        document.getElementById("searchInput")
+        .value
+        .trim();
+
+    if (keyword === "") {
+        loadUsers(currentStatus);
+        return;
+    }
+
+    const { data, error } =
+    await supabaseClient
+        .from("users")
+        .select("*")
+        .or(
+            `name.ilike.%${keyword}%,
+             mobile.ilike.%${keyword}%,
+             username.ilike.%${keyword}%`
+        );
+
+    if (error) {
+        console.log(error);
+        return;
+    }
+
+    renderUsers(data);
+}
+
+// ======================
+// LOGOUT
+// ======================
+
+async function logout() {
+
+    const result = await Swal.fire({
+        title: "Logout ?",
+        icon: "question",
+        showCancelButton: true
+    });
+
+    if (!result.isConfirmed) return;
+
+    await supabaseClient.auth.signOut();
+
+    window.location.href = "index.html";
 }
