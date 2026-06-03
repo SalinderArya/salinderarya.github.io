@@ -31,15 +31,20 @@ Super Admin |
 <nav class="sidebar">
 
 <ul>
-<li>Dashboard</li>
-<li>Pending Users</li>
-<li>Approved Users</li>
-<li>Rejected Users</li>
-<li>User Search</li>
-<li>Reports</li>
-<li>Settings</li>
+<li onclick="showPendingUsers()">Pending Users</li>
+<li onclick="showApprovedUsers()">Approved Users</li>
+<li onclick="showRejectedUsers()">Rejected Users</li>
+<li onclick="showAllUsers()">All Users</li>
+<li onclick="showSearch()">User Search</li>
 </ul>
-
+<div style="margin-bottom:15px;">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search Name / Mobile / Username"
+        onkeyup="searchUsers()"
+    >
+</div>
 </nav>
 
 <section class="content">
