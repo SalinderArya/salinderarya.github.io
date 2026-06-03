@@ -49,9 +49,8 @@ async function loadUsers(status = null) {
 function renderUsers(users) {
 
     const tbody =
-        // document.getElementById("userTableBody");
-document.getElementById("pageTitle").innerText =
-"Pending User Approval";
+        document.getElementById("userTableBody");
+
     tbody.innerHTML = "";
 
     users.forEach(user => {
@@ -131,7 +130,8 @@ async function approveUser(id) {
         "User Approved",
         "success"
     );
-
+document.getElementById("pageTitle").innerText =
+"Pending User Approval";
     loadUsers(currentStatus);
 }
 
