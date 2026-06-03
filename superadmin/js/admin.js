@@ -150,8 +150,8 @@ async function approveUser(id) {
         "User Approved",
         "success"
     );
-
-    loadUsers(currentStatus);
+loadUsers("approved");
+    //loadUsers(currentStatus);
 }
 
 // ======================
