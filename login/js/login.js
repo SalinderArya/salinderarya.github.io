@@ -55,7 +55,10 @@ await supabaseClient
 .eq("username", username)
 .eq("password", password)
 .single();
-
+console.log("Entered Username:", username);
+console.log("Entered Password:", password);
+console.log("DATA:", data);
+console.log("ERROR:", error);
 if(error || !data){
 
     Swal.fire(
