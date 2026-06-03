@@ -20,8 +20,10 @@ window.onload = () => {
 // ======================
 
 async function loadUsers(status = null) {
+console.log("STATUS =", status);
 
     currentStatus = status;
+
 
     const pageTitle =
     document.getElementById("pageTitle");
