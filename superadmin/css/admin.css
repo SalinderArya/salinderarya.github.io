@@ -99,23 +99,6 @@ text-align:center;
 
 /* BUTTONS */
 
-.approve-btn{
-background:green;
-color:white;
-border:none;
-padding:6px 10px;
-border-radius:4px;
-cursor:pointer;
-}
-
-.reject-btn{
-background:red;
-color:white;
-border:none;
-padding:6px 10px;
-border-radius:4px;
-cursor:pointer;
-}
 
 .modify-btn{
 background:#FFD700;
@@ -124,6 +107,32 @@ border:none;
 padding:6px 10px;
 border-radius:4px;
 cursor:pointer;
+}
+.approve-btn{
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.reject-btn{
+    background:#ffc107;
+    color:black;
+    border:none;
+    padding:8px 12px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.delete-btn{
+    background:#dc3545;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    cursor:pointer;
+    border-radius:5px;
 }
 
 .approve-btn:hover,
