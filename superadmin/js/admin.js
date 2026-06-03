@@ -243,20 +243,51 @@ async function deleteUser(id) {
 // ======================
 
 function showPendingUsers() {
+
+    document.getElementById("pageTitle").innerText =
+    "Pending User Approval";
+
     loadUsers("pending");
 }
 
 function showApprovedUsers() {
+
+    document.getElementById("pageTitle").innerText =
+    "Approved Users";
+
     loadUsers("approved");
 }
 
 function showRejectedUsers() {
+
+    document.getElementById("pageTitle").innerText =
+    "Rejected Users";
+
     loadUsers("rejected");
 }
 
 function showAllUsers() {
-    loadUsers(null);
+
+    document.getElementById("pageTitle").innerText =
+    "All Users";
+
+    loadUsers();
 }
+//function showPendingUsers() {
+  //  loadUsers("pending");
+//}
+
+//function showApprovedUsers() {
+  //  loadUsers("approved");
+//}
+
+//function showRejectedUsers() {
+  //  loadUsers("rejected");
+//}
+
+//function showAllUsers() {
+  //  loadUsers(null);
+//}
 
 // ======================
 // SEARCH
