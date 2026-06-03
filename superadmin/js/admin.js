@@ -49,8 +49,9 @@ async function loadUsers(status = null) {
 function renderUsers(users) {
 
     const tbody =
-        document.getElementById("userTableBody");
-
+        // document.getElementById("userTableBody");
+document.getElementById("pageTitle").innerText =
+"Pending User Approval";
     tbody.innerHTML = "";
 
     users.forEach(user => {
