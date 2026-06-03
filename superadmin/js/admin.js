@@ -130,7 +130,8 @@ async function approveUser(id) {
         "User Approved",
         "success"
     );
-
+document.getElementById("pageTitle").innerText =
+"Testing Header";
     loadUsers(currentStatus);
 }
 
