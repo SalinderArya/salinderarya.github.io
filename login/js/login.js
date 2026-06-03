@@ -11,7 +11,7 @@ SUPABASE_KEY
 );
 
 document
-.getElementById("loginBtn")
+.querySelector(".login-btn")
 .addEventListener("click", loginUser);
 
 async function loginUser(){
@@ -28,13 +28,41 @@ document.getElementById("password")
 if(!username || !password){
 
     Swal.fire(
-        "Missing",
-        "Enter Username & Password",
+        "Missing Information",
+        "Please enter Username and Password",
         "warning"
     );
 
     return;
 }
+
+// =====================
+// SUPER ADMIN LOGIN
+// =====================
+
+if(
+    username.toLowerCase() === "admin" &&
+    password === "Password"
+){
+
+    Swal.fire({
+        icon:"success",
+        title:"Super Admin Login Success",
+        timer:1500,
+        showConfirmButton:false
+    }).then(() => {
+
+        window.location.href =
+        "../superadmin/admin.html";
+
+    });
+
+    return;
+}
+
+// =====================
+// USER LOGIN
+// =====================
 
 const { data:user, error } =
 await supabaseClient
@@ -47,7 +75,7 @@ await supabaseClient
 if(error || !user){
 
     Swal.fire(
-        "Error",
+        "Login Failed",
         "Invalid Username or Password",
         "error"
     );
@@ -58,7 +86,7 @@ if(error || !user){
 if(user.status !== "approved"){
 
     Swal.fire(
-        "Pending",
+        "Account Pending",
         "Your account is not approved yet",
         "warning"
     );
@@ -66,14 +94,18 @@ if(user.status !== "approved"){
     return;
 }
 
-const { data:bank } =
+// =====================
+// CHECK BANK DETAILS
+// =====================
+
+const { data:bankData } =
 await supabaseClient
 .from("bank_details")
 .select("*")
 .eq("user_id", user.id)
 .maybeSingle();
 
-if(!bank){
+if(!bankData){
 
     const result =
     await Swal.fire({
@@ -81,48 +113,63 @@ if(!bank){
         title:"Complete Bank Details",
 
         html:`
-        <input id="bank_name"
+
+        <input
+        id="bank_name"
         class="swal2-input"
         placeholder="Bank Name">
 
-        <input id="account_holder"
+        <input
+        id="account_holder"
         class="swal2-input"
-        placeholder="Account Holder">
+        placeholder="Account Holder Name">
 
-        <input id="account_number"
+        <input
+        id="account_number"
         class="swal2-input"
         placeholder="Account Number">
 
-        <input id="ifsc_code"
+        <input
+        id="ifsc_code"
         class="swal2-input"
         placeholder="IFSC Code">
 
-        <input id="branch_name"
+        <input
+        id="branch_name"
         class="swal2-input"
         placeholder="Branch Name">
+
         `,
 
         confirmButtonText:
         "Save Details",
+
+        focusConfirm:false,
 
         preConfirm: () => {
 
             return {
 
                 bank_name:
-                document.getElementById("bank_name").value,
+                document.getElementById(
+                "bank_name").value,
 
                 account_holder:
-                document.getElementById("account_holder").value,
+                document.getElementById(
+                "account_holder").value,
 
                 account_number:
-                document.getElementById("account_number").value,
+                document.getElementById(
+                "account_number").value,
 
                 ifsc_code:
-                document.getElementById("ifsc_code").value,
+                document.getElementById(
+                "ifsc_code").value,
 
                 branch_name:
-                document.getElementById("branch_name").value
+                document.getElementById(
+                "branch_name").value
+
             };
         }
     });
@@ -136,7 +183,8 @@ if(!bank){
     .from("bank_details")
     .insert([{
 
-        user_id:user.id,
+        user_id:
+        user.id,
 
         bank_name:
         result.value.bank_name,
@@ -152,6 +200,7 @@ if(!bank){
 
         branch_name:
         result.value.branch_name
+
     }]);
 
     if(bankError){
@@ -164,7 +213,17 @@ if(!bank){
 
         return;
     }
+
+    Swal.fire(
+        "Saved",
+        "Bank Details Saved Successfully",
+        "success"
+    );
 }
+
+// =====================
+// SESSION
+// =====================
 
 localStorage.setItem(
     "userId",
@@ -172,9 +231,23 @@ localStorage.setItem(
 );
 
 localStorage.setItem(
+    "userName",
+    user.name
+);
+
+localStorage.setItem(
     "userType",
     user.user_type
 );
+
+localStorage.setItem(
+    "koCode",
+    user.ko_code
+);
+
+// =====================
+// REDIRECT
+// =====================
 
 Swal.fire({
     icon:"success",
@@ -183,14 +256,8 @@ Swal.fire({
     showConfirmButton:false
 }).then(() => {
 
-    if(user.user_type === "superadmin"){
-        window.location.href =
-        "../superadmin/admin.html";
-    }
-    else{
-        window.location.href =
-        "../dashboard/dashboard.html";
-    }
+    window.location.href =
+    "../dashboard/dashboard.html";
 
 });
 ```
