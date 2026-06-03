@@ -36,9 +36,7 @@ if(!username || !password){
     return;
 }
 
-// =====================
-// SUPER ADMIN LOGIN
-// =====================
+// SUPER ADMIN
 
 if(
     username.toLowerCase() === "admin" &&
@@ -60,11 +58,9 @@ if(
     return;
 }
 
-// =====================
 // USER LOGIN
-// =====================
 
-const { data:user, error } =
+const { data, error } =
 await supabaseClient
 .from("users")
 .select("*")
@@ -72,7 +68,7 @@ await supabaseClient
 .eq("password", password)
 .single();
 
-if(error || !user){
+if(error || !data){
 
     Swal.fire(
         "Login Failed",
@@ -83,7 +79,7 @@ if(error || !user){
     return;
 }
 
-if(user.status !== "approved"){
+if(data.status !== "approved"){
 
     Swal.fire(
         "Account Pending",
@@ -94,160 +90,20 @@ if(user.status !== "approved"){
     return;
 }
 
-// =====================
-// CHECK BANK DETAILS
-// =====================
-
-const { data:bankData } =
-await supabaseClient
-.from("bank_details")
-.select("*")
-.eq("user_id", user.id)
-.maybeSingle();
-
-if(!bankData){
-
-    const result =
-    await Swal.fire({
-
-        title:"Complete Bank Details",
-
-        html:`
-
-        <input
-        id="bank_name"
-        class="swal2-input"
-        placeholder="Bank Name">
-
-        <input
-        id="account_holder"
-        class="swal2-input"
-        placeholder="Account Holder Name">
-
-        <input
-        id="account_number"
-        class="swal2-input"
-        placeholder="Account Number">
-
-        <input
-        id="ifsc_code"
-        class="swal2-input"
-        placeholder="IFSC Code">
-
-        <input
-        id="branch_name"
-        class="swal2-input"
-        placeholder="Branch Name">
-
-        `,
-
-        confirmButtonText:
-        "Save Details",
-
-        focusConfirm:false,
-
-        preConfirm: () => {
-
-            return {
-
-                bank_name:
-                document.getElementById(
-                "bank_name").value,
-
-                account_holder:
-                document.getElementById(
-                "account_holder").value,
-
-                account_number:
-                document.getElementById(
-                "account_number").value,
-
-                ifsc_code:
-                document.getElementById(
-                "ifsc_code").value,
-
-                branch_name:
-                document.getElementById(
-                "branch_name").value
-
-            };
-        }
-    });
-
-    if(!result.isConfirmed){
-        return;
-    }
-
-    const { error:bankError } =
-    await supabaseClient
-    .from("bank_details")
-    .insert([{
-
-        user_id:
-        user.id,
-
-        bank_name:
-        result.value.bank_name,
-
-        account_holder:
-        result.value.account_holder,
-
-        account_number:
-        result.value.account_number,
-
-        ifsc_code:
-        result.value.ifsc_code,
-
-        branch_name:
-        result.value.branch_name
-
-    }]);
-
-    if(bankError){
-
-        Swal.fire(
-            "Error",
-            bankError.message,
-            "error"
-        );
-
-        return;
-    }
-
-    Swal.fire(
-        "Saved",
-        "Bank Details Saved Successfully",
-        "success"
-    );
-}
-
-// =====================
-// SESSION
-// =====================
-
 localStorage.setItem(
     "userId",
-    user.id
+    data.id
 );
 
 localStorage.setItem(
     "userName",
-    user.name
+    data.name
 );
 
 localStorage.setItem(
     "userType",
-    user.user_type
+    data.user_type
 );
-
-localStorage.setItem(
-    "koCode",
-    user.ko_code
-);
-
-// =====================
-// REDIRECT
-// =====================
 
 Swal.fire({
     icon:"success",
