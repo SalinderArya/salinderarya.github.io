@@ -277,14 +277,24 @@ async function searchUsers() {
 async function logout() {
 
     const result = await Swal.fire({
-        title: "Logout ?",
+        title: "Logout?",
+        text: "Are you sure you want to logout?",
         icon: "question",
-        showCancelButton: true
+        showCancelButton: true,
+        confirmButtonText: "Yes, Logout"
     });
 
     if (!result.isConfirmed) return;
 
     await supabaseClient.auth.signOut();
+
+    await Swal.fire({
+        title: "Logged Out",
+        text: "You have been logged out successfully.",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false
+    });
 
     window.location.href = "login/login.html";
 }
