@@ -23,6 +23,26 @@ async function loadUsers(status = null) {
 
     currentStatus = status;
 
+    const pageTitle =
+    document.getElementById("pageTitle");
+
+    if(status === "pending"){
+        pageTitle.innerText =
+        "Pending User Approval";
+    }
+    else if(status === "approved"){
+        pageTitle.innerText =
+        "Approved Users";
+    }
+    else if(status === "rejected"){
+        pageTitle.innerText =
+        "Rejected Users";
+    }
+    else{
+        pageTitle.innerText =
+        "All Users";
+    }
+
     let query = supabaseClient
         .from("users")
         .select("*")
@@ -130,8 +150,7 @@ async function approveUser(id) {
         "User Approved",
         "success"
     );
-document.getElementById("pageTitle").innerText =
-"Testing Header";
+
     loadUsers(currentStatus);
 }
 
