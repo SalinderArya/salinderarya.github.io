@@ -18,16 +18,17 @@ const supabaseClient = supabase.createClient(
     SUPABASE_KEY
 );
 
-  const { data, error } = await supabaseClient
+ const { data, error } = await supabaseClient
     .from("users")
     .select("*")
-    .eq("username", username.toLowerCase())
+    .eq("username", username)
     .eq("password", password);
 
-console.log(data);
-console.log(error);
+console.log("DATA:", data);
+console.log("ERROR:", error);
 
 if (data && data.length > 0) {
+    alert("Login Success");
     window.location.href = "../superadmin/admin.html";
 } else {
     alert("Invalid Username or Password");
