@@ -20,12 +20,14 @@ document.querySelector(".login-btn").addEventListener("click", async function ()
         SUPABASE_KEY
     );
 
-    const { data, error } = await supabaseClient
+  const { data, error } = await supabaseClient
     .from("users")
     .select("*")
     .eq("username", username)
     .eq("password", password);
 
+console.log("Username Entered:", username);
+console.log("Password Entered:", password);
 console.log("DATA:", data);
 console.log("ERROR:", error);
     
