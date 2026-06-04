@@ -23,23 +23,16 @@ document.querySelector(".login-btn").addEventListener("click", async function ()
   const { data, error } = await supabaseClient
     .from("users")
     .select("*")
-    .eq("username", username)
+    .eq("username", username.toLowerCase())
     .eq("password", password);
 
-console.log("Username Entered:", username);
-console.log("Password Entered:", password);
-console.log("DATA:", data);
-console.log("ERROR:", error);
-    
-    if (data) {
+console.log(data);
+console.log(error);
 
-        window.location.href = "../superadmin/admin.html";
-
-    } else {
-
-        alert("Invalid Username or Password");
-        console.log(error);
-
-    }
+if (data && data.length > 0) {
+    window.location.href = "../superadmin/admin.html";
+} else {
+    alert("Invalid Username or Password");
+}
 
 });
