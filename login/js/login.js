@@ -1,16 +1,31 @@
-document.querySelector(".login-btn").addEventListener("click", function(){
+document.querySelector(".login-btn").addEventListener("click", async function () {
 
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    if(username === "admin" && password === "admin"){
+    // Default Admin Login
+    if (username === "admin" && password === "admin") {
+        window.location.href = "../superadmin/admin.html";
+        return;
+    }
+
+    // Supabase Login Check
+    const { data, error } = await supabase
+        .from("users") // apni table ka naam
+        .select("*")
+        .eq("username", username)
+        .eq("password", password)
+        .single();
+
+    if (data) {
 
         window.location.href = "../superadmin/admin.html";
 
-    }else{
+    } else {
 
         alert("Invalid Username or Password");
 
+        console.log(error);
     }
 
 });
