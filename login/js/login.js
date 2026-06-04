@@ -12,37 +12,73 @@ SUPABASE_KEY
 
 document
 .getElementById("loginBtn")
-.addEventListener("click", testLogin);
-
-async function testLogin(){
+.addEventListener("click", async function(){
 
 ```
-alert("Button Clicked");
+const username =
+document.getElementById("username")
+.value.trim();
 
-const { data, error } =
-await supabaseClient
-.from("users")
-.select("*");
+const password =
+document.getElementById("password")
+.value.trim();
 
-console.log("DATA =", data);
-console.log("ERROR =", error);
+// SUPER ADMIN
 
-if(error){
+if(
+    username === "admin" &&
+    password === "admin"
+){
 
-    Swal.fire(
-        "Database Error",
-        error.message,
-        "error"
-    );
+    alert("Super Admin Login");
+
+    window.location.href =
+    "../superadmin/admin.html";
 
     return;
 }
 
-Swal.fire(
-    "Success",
-    "Database Connected",
-    "success"
-);
+// USER LOGIN
+
+const { data, error } =
+await supabaseClient
+.from("users")
+.select("*")
+.eq("username", username);
+
+console.log(data);
+console.log(error);
+
+if(error){
+
+    alert(error.message);
+    return;
+}
+
+if(!data || data.length === 0){
+
+    alert("User Not Found");
+    return;
+}
+
+const user = data[0];
+
+if(user.password !== password){
+
+    alert("Wrong Password");
+    return;
+}
+
+if(user.status !== "approved"){
+
+    alert("Account Not Approved");
+    return;
+}
+
+alert("Login Success");
+
+window.location.href =
+"../dashboard/dashboard.html";
 ```
 
-}
+});
