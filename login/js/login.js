@@ -9,9 +9,19 @@ document.querySelector(".login-btn").addEventListener("click", async function ()
         return;
     }
 
-    // Supabase Login Check
-    const { data, error } = await supabase
-        .from("users") // apni table ka naam
+    const SUPABASE_URL =
+        "https://hjxqtfykngkwmiejeyei.supabase.co";
+
+    const SUPABASE_KEY =
+        "YOUR_ANON_KEY";
+
+    const supabaseClient = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+    const { data, error } = await supabaseClient
+        .from("users")
         .select("*")
         .eq("username", username)
         .eq("password", password)
@@ -24,8 +34,8 @@ document.querySelector(".login-btn").addEventListener("click", async function ()
     } else {
 
         alert("Invalid Username or Password");
-
         console.log(error);
+
     }
 
 });
