@@ -1,80 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+document.querySelector(".login-btn").addEventListener("click", function(){
 
-<head>
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    if(username === "admin" && password === "admin"){
 
-<title>Prince Computers Login</title>
+        window.location.href = "../superadmin/admin.html";
 
-<link rel="stylesheet" href="css/login.css">
+    }else{
 
-</head>
+        alert("Invalid Username or Password");
 
-<body>
+    }
 
-<div class="container">
-
-    <!-- LEFT PANEL -->
-
-    <div class="left-panel">
-
-        <div class="company-box">
-
-            <h1>Prince Computers</h1>
-
-            <p>Garhi Birbal</p>
-
-            <h3>Welcome To Portal</h3>
-
-            <span>Management & Banking Portal</span>
-
-        </div>
-
-    </div>
-
-    <!-- YELLOW DIVIDER -->
-
-    <div class="divider"></div>
-
-    <!-- RIGHT PANEL -->
-
-    <div class="right-panel">
-
-        <div class="login-card">
-
-          <h2>User Login</h2>
-
-            <input type="text" placeholder="User ID">
-
-            <input type="password" placeholder="Password">
-
-            <button class="login-btn">
-                Login
-            </button>
-            <button
-                class="create-btn"
-                onclick="window.location='../create-user/create-user.html'"
-            >
-                Create User
-            </button>
-
-            <button class="forget-btn">
-                Forget Password
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="js/login.js"></script>
-
-</body>
-</html>
+});
