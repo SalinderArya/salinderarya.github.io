@@ -1,15 +1,24 @@
 alert("JS Loaded");
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener(
+"DOMContentLoaded",
+function(){
 
 ```
-document
-.getElementById("loginBtn")
-.addEventListener("click", function(){
+    alert("DOM Loaded");
 
-    alert("Button Working");
+    const btn =
+    document.getElementById("loginBtn");
 
-});
+    console.log(btn);
+
+    btn.onclick = function(){
+
+        alert("Button Working");
+
+    };
+
+}
 ```
 
-});
+);
