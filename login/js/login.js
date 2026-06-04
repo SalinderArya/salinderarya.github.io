@@ -21,12 +21,14 @@ document.querySelector(".login-btn").addEventListener("click", async function ()
     );
 
     const { data, error } = await supabaseClient
-        .from("users")
-        .select("*")
-        .eq("username", username)
-        .eq("password", password)
-        .single();
+    .from("users")
+    .select("*")
+    .eq("username", username)
+    .eq("password", password);
 
+console.log("DATA:", data);
+console.log("ERROR:", error);
+    
     if (data) {
 
         window.location.href = "../superadmin/admin.html";
