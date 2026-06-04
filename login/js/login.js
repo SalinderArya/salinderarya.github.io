@@ -51,10 +51,10 @@ if(
 const { data, error } =
 await supabaseClient
 .from("users")
-.select("*")
-.eq("username", username)
-.eq("password", password)
-.single();
+.select("*");
+alert("Check Console");
+console.log("ALL USERS =", data);
+console.log("ERROR =", error);
 console.log("Entered Username:", username);
 console.log("Entered Password:", password);
 console.log("DATA:", data);
