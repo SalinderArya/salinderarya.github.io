@@ -1,16 +1,22 @@
-alert("Login JS Loaded");
+alert("JS Loaded");
 
-document.addEventListener("DOMContentLoaded", function(){
+window.onload = function(){
 
 ```
 const btn =
 document.getElementById("loginBtn");
 
-btn.onclick = function(){
+alert(btn);
 
-    alert("Button Click Working");
+if(btn){
 
-};
+    btn.onclick = function(){
+
+        alert("Button Working");
+
+    };
+
+}
 ```
 
-});
+};
