@@ -1,16 +1,85 @@
-document.querySelector(".login-btn").addEventListener("click", function(){
+<!DOCTYPE html>
+<html lang="en">
 
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+<head>
 
-    if(username === "admin" && password === "admin"){
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        window.location.href = "../superadmin/admin.html";
+<title>Prince Computers Login</title>
 
-    }else{
+<link rel="stylesheet" href="css/login.css">
 
-        alert("Invalid Username or Password");
+</head>
 
-    }
+<body>
 
-});
+<div class="container">
+
+    <!-- LEFT PANEL -->
+
+    <div class="left-panel">
+
+        <div class="company-box">
+
+            <h1>Prince Computers</h1>
+
+            <p>Garhi Birbal</p>
+
+            <h3>Welcome To Portal</h3>
+
+            <span>Management & Banking Portal</span>
+
+        </div>
+
+    </div>
+
+    <!-- YELLOW DIVIDER -->
+
+    <div class="divider"></div>
+
+    <!-- RIGHT PANEL -->
+
+    <div class="right-panel">
+
+        <div class="login-card">
+
+            <h2>Login</h2>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="User ID"
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+            >
+
+            <button class="login-btn">
+                Login
+            </button>
+
+            <button
+                class="create-btn"
+                onclick="window.location='../create-user/create-user.html'"
+            >
+                Create User
+            </button>
+
+            <button class="forget-btn">
+                Forget Password
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/login.js"></script>
+
+</body>
+</html>
