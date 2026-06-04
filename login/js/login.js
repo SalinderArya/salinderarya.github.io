@@ -1,42 +1,16 @@
-document.getElementById("loginForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+document.querySelector(".login-btn").addEventListener("click", function(){
 
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-    // Empty validation
-    if (username === "" || password === "") {
-        Swal.fire({
-            icon: "warning",
-            title: "Missing Fields",
-            text: "Please enter Username and Password!"
-        });
-        return;
-    }
+    if(username === "admin" && password === "admin"){
 
-    // Login validation
-    if (username === "admin" && password === "admin") {
+        window.location.href = "../superadmin/admin.html";
 
-        Swal.fire({
-            icon: "success",
-            title: "Login Successful!",
-            text: "Welcome Admin",
-            timer: 1500,
-            showConfirmButton: false
-        }).then(() => {
+    }else{
 
-            // Dashboard redirect
-            window.location.href = "../superadmin/dashboard.html";
-
-        });
-
-    } else {
-
-        Swal.fire({
-            icon: "error",
-            title: "Login Failed",
-            text: "Invalid Username or Password!"
-        });
+        alert("Invalid Username or Password");
 
     }
+
 });
