@@ -1,3 +1,4 @@
+alert("Line 1");
 const SUPABASE_URL =
 "https://hjxqtfykngkwmiejeyei.supabase.co";
 
