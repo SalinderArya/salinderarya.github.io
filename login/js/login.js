@@ -18,74 +18,20 @@ const supabaseClient = supabase.createClient(
     SUPABASE_KEY
 );
 
-const { data: userData } = await supabaseClient
+ const { data, error } = await supabaseClient
     .from("users")
     .select("*")
     .eq("username", username)
-    .eq("password", password)
-    .single();
+    .eq("password", password);
 
-if (!userData) {
-    Swal.fire("Error", "Invalid Username or Password", "error");
-    return;
-}
+console.log("DATA:", data);
+console.log("ERROR:", error);
 
-// Approval Check
-if (!userData.approval) {
-    Swal.fire(
-        "Pending Approval",
-        "Your account has not been approved yet.",
-        "warning"
-    );
-    return;
-}
-
-    const { data: bankData } = await supabaseClient
-    .from("bank_details")
-    .select("*")
-    .eq("user_id", userData.id)
-    .single();
-    if (!bankData) {
-
-    const { value: formValues } = await Swal.fire({
-        title: "Bank Details Required",
-        html: `
-            <input id="holder" class="swal2-input" placeholder="Account Holder">
-            <input id="bank" class="swal2-input" placeholder="Bank Name">
-            <input id="account" class="swal2-input" placeholder="Account Number">
-            <input id="ifsc" class="swal2-input" placeholder="IFSC Code">
-        `,
-        focusConfirm: false,
-        showCancelButton: false,
-        preConfirm: () => {
-            return {
-                holder: document.getElementById('holder').value,
-                bank: document.getElementById('bank').value,
-                account: document.getElementById('account').value,
-                ifsc: document.getElementById('ifsc').value
-            };
-        }
-    });
-
-    await supabaseClient
-        .from("bank_details")
-        .insert([
-            {
-                user_id: userData.id,
-                account_holder: formValues.holder,
-                bank_name: formValues.bank,
-                account_number: formValues.account,
-                ifsc_code: formValues.ifsc
-            }
-        ]);
-}
-    Swal.fire({
-    icon: "success",
-    title: "Login Successful",
-    timer: 1500,
-    showConfirmButton: false
-}).then(() => {
+if (data && data.length > 0) {
+    alert("Login Success");
     window.location.href = "../superadmin/admin.html";
+} else {
+    alert("Invalid Username or Password");
+}
+
 });
-
-
