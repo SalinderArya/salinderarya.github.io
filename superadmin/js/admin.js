@@ -347,6 +347,6 @@ async function logout() {
     });
 
     window.location.replace(
-        "https://salinderarya.github.io/PrinceComputers/login/login.html"
+        "https://salinderarya.github.io/login/login.html"
     );
 }
