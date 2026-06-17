@@ -29,7 +29,8 @@ console.log("ERROR:", error);
 
 if (data && data.length > 0) {
     alert("Login Success");
-    window.location.href = "../superadmin/admin.html";
+   // window.location.href = "../superadmin/admin.html";
+    window.location.href = 'dashboard.html';
 } else {
     alert("Invalid Username or Password");
 }
