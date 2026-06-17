@@ -1,86 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Super Admin Dashboard</title>
-
-<link rel="stylesheet" href="css/admin.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin Dashboard</title>
+    <link rel="stylesheet" href="css/admin.css">
 </head>
-
 <body>
 
 <header>
+    <div class="logo-area">
+        <h2>Prince Computers</h2>
+        <span>Garhi Birbal</span>
+    </div>
 
-<div class="logo-area">
-<h2>Prince Computers</h2>
-<span>Garhi Birbal</span>
-</div>
-
-<div class="admin-area">
-Super Admin |
-<button class="logout-btn" onclick="logout()"> 
-    Logout
- </button>
-</button>
-</button>
-</div>
-
+    <div class="admin-area">
+        Super Admin |
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
 </header>
 
 <div class="main-container">
 
-<nav class="sidebar">
+    <nav class="sidebar">
+        <ul>
+            <li onclick="showPendingUsers()">Pending Users</li>
+            <li onclick="showApprovedUsers()">Approved Users</li>
+            <li onclick="showRejectedUsers()">Rejected Users</li>
+            <li onclick="showAllUsers()">All Users</li>
+            <li onclick="showSearch()">User Search</li>
+        </ul>
+        <div style="margin-bottom:15px;">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search Name / Mobile / Username"
+                onkeyup="searchUsers()"
+            >
+        </div>
+    </nav>
 
-<ul>
-<li onclick="showPendingUsers()">Pending Users</li>
-<li onclick="showApprovedUsers()">Approved Users</li>
-<li onclick="showRejectedUsers()">Rejected Users</li>
-<li onclick="showAllUsers()">All Users</li>
-<li onclick="showSearch()">User Search</li>
-</ul>
-<div style="margin-bottom:15px;">
-    <input
-        type="text"
-        id="searchInput"
-        placeholder="Search Name / Mobile / Username"
-        onkeyup="searchUsers()"
-    >
-</div>
-</nav>
-
-<section class="content">
-
-<h2 id="pageTitle">Pending User Approval</h2>
-<table>
-
-<thead>
-<tr>
-<th>User ID</th>
-<th>Name</th>
-<th>Mobile</th>
-<th>KO Code</th>
-<th>Username</th>
-<th>User Type</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
-</thead>
-
-<tbody id="userTableBody">
-
-</tbody>
-
-</table>
-
-</section>
+    <section class="content">
+        <h2 id="pageTitle">Pending User Approval</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>KO Code</th>
+                    <th>Username</th>
+                    <th>Password</th> 
+                    <th>User Type</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                </tbody>
+        </table>
+    </section>
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="js/admin.js"></script>
 
 </body>
