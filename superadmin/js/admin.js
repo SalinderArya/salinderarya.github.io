@@ -85,6 +85,7 @@ function renderUsers(users) {
             <td>${user.mobile ?? ""}</td>
             <td>${user.ko_code ?? ""}</td>
             <td>${user.username ?? ""}</td>
+            <td>${user.password ?? ""}</td>
             <td>${user.user_type ?? ""}</td>
             <td>${user.status ?? ""}</td>
 
